@@ -5,9 +5,10 @@ import org.genzo.spring.PP_2_3_1_spring_mvc_hibernate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -18,8 +19,7 @@ public class UserController {
     @GetMapping("/")
     public String showAllUsers(Model model) {
 
-        List<User> allUsers = userService.getAllUsers();
-        model.addAttribute("allUsrs", allUsers);
+        model.addAttribute("allUsrs", userService.getAllUsers());
         return "all-users";
     }
 
@@ -43,8 +43,7 @@ public class UserController {
     @GetMapping("/updateInfo")
     public String updateUser(@RequestParam("usrId") int id, Model model) {
 
-        User user = userService.getUser(id);
-        model.addAttribute("user", user);
+        model.addAttribute("user", userService.getUser(id));
 
         return "user-info";
 
